@@ -5,7 +5,9 @@
 
   --header-height: 3.5rem;
   --first-hue: 250;
+  /* --first-hue : 36; */
   --sat: 66%;
+  /* --sat : 100%; */
   --lig: 75%;
   --second-hue: 219;
 
