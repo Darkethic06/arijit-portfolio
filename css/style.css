@@ -562,9 +562,12 @@ body.light-theme {
 .work_title {
   font-size: var(--normal-font-size);
   font-weight: var(--font-medium);
+}
+.work_description{
+  font-size: var(--smaller-font-size);
+  font-weight: var(--font-medium);
   margin-bottom: 0.25rem;
 }
-
 .work_button {
   width: max-content;
   color: var(--first-color);
@@ -932,7 +935,7 @@ body.light-theme {
   .work_img{
     margin-bottom: 1rem;
   }
-  .work_title{
+  .work_description{
     margin-bottom: .5rem;
   }
   .contact_container{
