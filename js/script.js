@@ -1,102 +1,183 @@
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+// --------------------Header background on scroll---------------------
+const header = document.getElementById('header')
+
 function scrollHeader() {
-    const header = document.getElementById('header')
-    if(this.scrollY>=50){
-        header.classList.add('scroll-header');
-
-    } else{
-        header.classList.remove('scroll-header')
-    }
+    header.classList.toggle('scroll-header', window.scrollY >= 50)
 }
 
-window.addEventListener('scroll',scrollHeader);
+window.addEventListener('scroll', scrollHeader, { passive: true })
+scrollHeader()
 
-// --------------------Mixitup portfolio sorting---------------------
+// --------------------Mobile menu---------------------
+const navToggle = document.getElementById('nav-toggle')
+const navList = document.getElementById('nav-list')
 
-let mixerPortfolio = mixitup('.work_container', {
-    selectors: {
-        target: '.work_card'
-    },
-    animation: {
-        duration: 300
-    }
-});
-// ------------------------activr link work
+navToggle.addEventListener('click', () => {
+    const open = navList.classList.toggle('show')
+    navToggle.innerHTML = open ? "<i class='bx bx-x'></i>" : "<i class='bx bx-menu'></i>"
+    navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu')
+})
 
-const linkWork =  document.querySelectorAll('.work_item')
+navList.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+    navList.classList.remove('show')
+    navToggle.innerHTML = "<i class='bx bx-menu'></i>"
+}))
 
-function activeWork(){
-    linkWork.forEach(L=>L.classList.remove('active_work'))
-    this.classList.add('active_work')
-}
-
-linkWork.forEach(L=>L.addEventListener('click',activeWork))
-
-/* ---------------------------Scroll section active link------------------------ */
-
+// --------------------Active nav link on scroll---------------------
 const sections = document.querySelectorAll('section[id]')
 
-function scrollActive(){
-    const scrollY = window.pageYOffset
-
-    sections.forEach(current=>{
-        const sectionHeight = current.offsetHeight,
-        sectionTop = current.offsetTop - 58,
-        sectionID = current.getAttribute('id')
-
-        if (scrollY > sectionTop && scrollY <= sectionTop+sectionHeight) {
-            document.querySelector('.nav_menu a[href*='+sectionID+ ']').classList.add('active-link')
-
-        }else{
-            document.querySelector('.nav_menu a[href*='+sectionID+ ']').classList.remove('active-link')
-        }
+const sectionObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (!entry.isIntersecting) return
+        const id = entry.target.id
+        document.querySelectorAll('.nav_link').forEach(link => {
+            link.classList.toggle('active-link', link.getAttribute('href') === '#' + id)
+        })
     })
+}, { rootMargin: '-45% 0px -50% 0px' })
 
-}
+sections.forEach(s => sectionObserver.observe(s))
 
-window.addEventListener('scroll', scrollActive)
-
-// -------------------------Dark and light theme--------------------------------------------
-
+// --------------------Dark and light theme---------------------
 const themeButton = document.getElementById('theme-button')
 const lightTheme = 'light-theme'
-const iconTheme = 'bx-sun'
 
-// Previously selected topic (if user selected)
-const selectedTheme = localStorage.getItem('selected-theme')
-const selectedIcon = localStorage.getItem('selected-icon')
-
-// We obtain the current theme that the interface has by validating the dark-theme class
-const getCurrentTheme = () => document.body.classList.contains(lightTheme) ? 'dark' : 'light'
-const getCurrentIcon = () => themeButton.classList.contains(iconTheme) ? 'bx bx-moon' : 'bx bx-sun'
-
-// We validate if the user previously chose a topic
-if (selectedTheme) {
-  // If the validation is fulfilled, we ask what the issue was to know if we activated or deactivated the dark
-  document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](lightTheme)
-  themeButton.classList[selectedIcon === 'bx bx-moon' ? 'add' : 'remove'](iconTheme)
+function applyTheme(theme) {
+    document.body.classList.toggle(lightTheme, theme === 'light')
+    themeButton.innerHTML = theme === 'light' ? "<i class='bx bx-moon'></i>" : "<i class='bx bx-sun'></i>"
+    window.dispatchEvent(new CustomEvent('themechange', { detail: theme }))
 }
 
-// Activate / deactivate the theme manually with the button
+let savedTheme = null
+try { savedTheme = localStorage.getItem('selected-theme') } catch (e) { }
+applyTheme(savedTheme === 'light' ? 'light' : 'dark')
+
 themeButton.addEventListener('click', () => {
-    // Add or remove the dark / icon theme
-    document.body.classList.toggle(lightTheme)
-    themeButton.classList.toggle(iconTheme)
-    // We save the theme and the current icon that the user chose
-    localStorage.setItem('selected-theme', getCurrentTheme())
-    localStorage.setItem('selected-icon', getCurrentIcon())
-})
-// ------------------------------------Scroll reveal js-------------------------------////
-
-
-const sr = ScrollReveal({
-    origin:'top',
-    distance:'60px',
-    duration:2500,
-    delay:400,
-    // reset:true 
+    const next = document.body.classList.contains(lightTheme) ? 'dark' : 'light'
+    applyTheme(next)
+    try { localStorage.setItem('selected-theme', next) } catch (e) { }
 })
 
-sr.reveal('.home_data')
-sr.reveal('.home_handle',{delay:700})
-sr.reveal('.home_social, .home_scroll',{delay:900, origin:'bottom'})
+// --------------------Typing effect---------------------
+const roles = [
+    'Backend Engineer',
+    'Laravel & PHP Engineer',
+    'API & Microservices Engineer',
+    'Full Stack Developer',
+    'System Design Enthusiast',
+    'Cybersecurity Enthusiast',
+]
+const typed = document.getElementById('typed')
 
+if (reduceMotion) {
+    typed.textContent = roles[0]
+} else {
+    let roleIndex = 0, charIndex = 0, deleting = false
+
+    function type() {
+        const word = roles[roleIndex]
+        charIndex += deleting ? -1 : 1
+        typed.textContent = word.slice(0, charIndex)
+
+        let delay = deleting ? 40 : 85
+        if (!deleting && charIndex === word.length) {
+            deleting = true
+            delay = 1800
+        } else if (deleting && charIndex === 0) {
+            deleting = false
+            roleIndex = (roleIndex + 1) % roles.length
+            delay = 300
+        }
+        setTimeout(type, delay)
+    }
+    type()
+}
+
+// --------------------Reveal on scroll---------------------
+const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible')
+            revealObserver.unobserve(entry.target)
+        }
+    })
+}, { threshold: 0.12 })
+
+document.querySelectorAll('.reveal').forEach((el, i) => {
+    el.style.transitionDelay = (i % 3) * 90 + 'ms'
+    revealObserver.observe(el)
+})
+
+// --------------------Animated counters---------------------
+const counterObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (!entry.isIntersecting) return
+        const el = entry.target
+        const target = +el.dataset.count
+        const start = performance.now()
+        const duration = reduceMotion ? 0 : 1400
+
+        function tick(now) {
+            const p = duration ? Math.min((now - start) / duration, 1) : 1
+            el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)))
+            if (p < 1) requestAnimationFrame(tick)
+        }
+        requestAnimationFrame(tick)
+        counterObserver.unobserve(el)
+    })
+}, { threshold: 0.6 })
+
+document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el))
+
+// --------------------3D tilt cards---------------------
+const finePointer = window.matchMedia('(pointer: fine)').matches
+
+if (finePointer && !reduceMotion) {
+    document.querySelectorAll('.tilt').forEach(card => {
+        const max = card.classList.contains('about_photo') ? 10 : 7
+
+        card.addEventListener('pointermove', e => {
+            const r = card.getBoundingClientRect()
+            const x = (e.clientX - r.left) / r.width - 0.5
+            const y = (e.clientY - r.top) / r.height - 0.5
+            card.style.transition = 'transform 0.1s linear'
+            card.style.transform =
+                `perspective(900px) rotateX(${-y * max}deg) rotateY(${x * max}deg) translateZ(0)`
+        })
+
+        card.addEventListener('pointerleave', () => {
+            card.style.transition = 'transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)'
+            card.style.transform = ''
+        })
+    })
+}
+
+// --------------------Project filters---------------------
+const filters = document.querySelectorAll('.work_filter')
+const workCards = document.querySelectorAll('.work_card')
+
+filters.forEach(btn => btn.addEventListener('click', () => {
+    filters.forEach(f => f.classList.remove('active'))
+    btn.classList.add('active')
+    const cat = btn.dataset.filter
+    workCards.forEach(card => {
+        const show = cat === 'all' || card.dataset.cat === cat || card.dataset.cat === 'all'
+        card.classList.toggle('hidden', !show)
+    })
+}))
+
+// --------------------Contact form (opens mail client)---------------------
+document.getElementById('contact-form').addEventListener('submit', e => {
+    e.preventDefault()
+    const fields = e.target.elements
+    const name = fields['name'].value.trim()
+    const email = fields['email'].value.trim()
+    const message = fields['message'].value.trim()
+    const subject = encodeURIComponent(`Project enquiry from ${name}`)
+    const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`)
+    window.location.href = `mailto:arijitpaul062@gmail.com?subject=${subject}&body=${body}`
+})
+
+document.getElementById('year').textContent = new Date().getFullYear()

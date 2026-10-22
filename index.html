@@ -3,568 +3,416 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="author" content="Arijit Paul">
-  <meta name="description" content="This is my Portfolio, made with HTML,CSS,JS">
-  <title>A Techie</title>
+  <meta name="description"
+    content="Arijit Paul — Full Stack Web Developer and Ethical Hacker. Building fast, secure web experiences with PHP, Laravel, React, Vue and Node.">
+  <meta name="theme-color" content="#070b18">
+  <meta property="og:title" content="Arijit Paul — Full Stack Developer & Ethical Hacker">
+  <meta property="og:description" content="Secure, fast and well-crafted web experiences.">
+  <meta property="og:image" content="assets/me.png">
+  <title>Arijit Paul — Developer & Ethical Hacker</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+
+  <script type="importmap">
+    { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
+  </script>
 </head>
-<link href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="css/style.css" />
-<!-- --------------------CSS File -------------------- -->
 
 <body>
-  <!-- -------------Header -------------- -->
+  <!-- --------------------3D background canvas-------------------- -->
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <div class="noise" aria-hidden="true"></div>
 
+  <!-- -------------Header -------------- -->
   <header class="header" id="header">
     <nav class="nav container">
-      <a href="" class="nav_logo"> ARIJIT </a>
+      <a href="#home" class="nav_logo"><span class="nav_logo-mark">&lt;/&gt;</span> arijit<span class="accent">.</span></a>
 
-      <div class="nav_menu">
-        <ul class="nav_list">
-          <li class="nav_item">
-            <a href="#home" class="nav_link active-link">
-              <i class='bx bx-home'></i>
-            </a>
-          </li>
-          <li class="nav_item">
-            <a href="#about" class="nav_link">
-              <i class='bx bx-user'></i>
-            </a>
-          </li>
-          <li class="nav_item">
-            <a href="#skills" class="nav_link">
-              <i class='bx bx-book'></i>
-            </a>
-          </li>
-          <li class="nav_item">
-            <a href="#work" class="nav_link">
-              <i class='bx bx-briefcase'></i>
-            </a>
-          </li>
-          <li class="nav_item">
-            <a href="#contact" class="nav_link">
-              <i class='bx bx-message-square-detail'></i>
-            </a>
-          </li>
-        </ul>
+      <ul class="nav_list" id="nav-list">
+        <li><a href="#about" class="nav_link">About</a></li>
+        <li><a href="#skills" class="nav_link">Skills</a></li>
+        <li><a href="#experience" class="nav_link">Experience</a></li>
+        <li><a href="#work" class="nav_link">Projects</a></li>
+        <li><a href="#contact" class="nav_link">Contact</a></li>
+      </ul>
+
+      <div class="nav_actions">
+        <button class="icon-btn" id="theme-button" aria-label="Toggle theme"><i class='bx bx-sun'></i></button>
+        <button class="icon-btn nav_toggle" id="nav-toggle" aria-label="Open menu"><i class='bx bx-menu'></i></button>
       </div>
-
-      <!-- theme change button -->
-      <i class='bx bx-moon change-theme' id="theme-button"></i>
     </nav>
   </header>
-  <!---------------------------------- main section------------------------- -->
+
   <main class="main">
     <!-- ------------------Home section-------------------- -->
-    <section class="home section" id="home">
-      <div class="home_container container grid">
+    <section class="home" id="home">
+      <div class="home_container container">
         <div class="home_data">
-          <span class="home_greeting">
-            Hello I'm
-          </span>
+          <span class="home_tag mono"><span class="pulse"></span> Available for freelance &amp; full-time roles</span>
           <h1 class="home_name">
-            Arijit Paul
+            Hi, I'm <span class="gradient-text">Arijit Paul</span>
           </h1>
-          <h3 class="home_education">
-            Full Stack Developer, Ethical Hacker
-          </h3>
-          <div class="home_button">
-            <a href="https://stationx-public-download.s3.us-west-2.amazonaws.com/nmap_cheet_sheet_v7.pdf"
-              class="button button-ghost" download="">Download CV</a>
-            <a href="#about" class="button">About Me</a>
+          <h2 class="home_role mono">
+            <span class="accent">&gt;</span> <span id="typed"></span><span class="caret">_</span>
+          </h2>
+          <p class="home_description">
+            Full stack developer with 4.5+ years of experience building web and mobile products. A cybersecurity
+            enthusiast at heart, I care about secure, scalable and innovative solutions, and I'm currently building
+            my own health &amp; fitness startup while leveling up in AI engineering.
+          </p>
+          <div class="home_buttons">
+            <a href="#work" class="button">View my work <i class='bx bx-right-arrow-alt'></i></a>
+            <a href="#contact" class="button button-ghost">Let's talk</a>
+          </div>
+          <div class="home_social">
+            <a href="https://github.com/Darkethic06" target="_blank" rel="noopener" aria-label="GitHub"><i class='bx bxl-github'></i></a>
+            <a href="https://www.linkedin.com/in/arijitpaul062/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class='bx bxl-linkedin-square'></i></a>
+            <a href="https://medium.com/@arijitpaul062" target="_blank" rel="noopener" aria-label="Medium"><i class='bx bxl-medium'></i></a>
+            <a href="mailto:arijitpaul062@gmail.com" aria-label="Email"><i class='bx bx-envelope'></i></a>
           </div>
         </div>
-        <div class="home_handle">
-          <img src="assets/me.png" alt="" class="home_img">
-        </div>
-        <div class="home_social">
-          <a href="" class="home_social-link" target="_blank">
-            <i class='bx bxl-instagram-alt'></i>
-          </a>
-          <a href="https://www.linkedin.com/in/arijitpaul062/" class="home_social-link" target="_blank">
-            <i class='bx bxl-linkedin-square'></i>
-          </a>
-          <a href="https://github.com/Darkethic06" class="home_social-link" target="_blank">
-            <i class='bx bxl-github'></i>
-          </a>
-          <a href="https://medium.com/@arijitpaul062" class="home_social-link" target="_blank">
-            <i class='bx bxl-medium'></i>
-          </a>
-        </div>
-        <a href="#about" class="home_scroll">
-          <i class='bx bx-mouse home_scroll-icon'></i>
-          <span class="home_scroll-name">Scroll Down</span>
-        </a>
-
       </div>
 
+      <a href="#about" class="home_scroll mono" aria-label="Scroll down">
+        <span class="home_scroll-line"></span> scroll
+      </a>
     </section>
 
     <!-- ------------------About section-------------------- -->
+    <section class="section" id="about">
+      <div class="container">
+        <header class="section_head reveal">
+          <span class="section_subtitle mono">01. about</span>
+          <h2 class="section_title">Developer by trade, <span class="gradient-text">hacker by mindset</span></h2>
+        </header>
 
-    <section class="about section" id="about">
-      <span class="section_subtitle">My Introduction</span>
-      <h2 class="section_title">About Me</h2>
-      <div class="about_container container grid">
-        <img src="assets/4905784-removebg-preview.png" alt="" class="about_img">
-        <div class="about_data">
-          <div class="about_info">
-            <div class="about_box">
-              <i class='bx bx-award about_icon'></i>
-              <h3 class="about_title">Freelancing</h3>
-              <span class="about_subtitle">3 Years Experience</span>
-
+        <div class="about_grid">
+          <div class="about_photo reveal tilt">
+            <div class="about_photo-frame">
+              <img src="assets/me.png" alt="Portrait of Arijit Paul" loading="lazy">
             </div>
-            <div class="about_box">
-              <i class='bx bx-award about_icon'></i>
-              <h3 class="about_title">Industry</h3>
-              <span class="about_subtitle"> 3+ Years Experience</span>
-
-            </div>
-            <div class="about_box">
-              <i class='bx bx-briefcase-alt about_icon'></i>
-              <h3 class="about_title">Completed</h3>
-              <span class="about_subtitle">20+ Projects</span>
-
-            </div>
-           
+            <div class="about_photo-glow"></div>
           </div>
-          <p class="about_description">I am a versatile full-stack web developer and cybersecurity enthusiast. With a passion for creating robust and secure digital solutions,combines expertise in networking and cybersecurity with extensive web development skills to deliver innovative and protected online experiences. </p>
-          <a href="#contact" class="button">Contact Me </a>
-        </div>
-      </div>
-    </section>
-    <!-- ------------------skill section-------------------- -->
-    <section class="skills section" id="skills">
-      <span class="section_subtitle">My Abilities</span>
-      <h2 class="section_title">My Experience</h2>
 
-      <div class="skills_container container grid">
-        <div class="skills_content">
-          <h3 class="skills_title">Web Development</h3>
-          <div class="skills_box">
-            <div class="skills_group">
-              <div class="skills_data">
-                <i class='bx bxl-html5'></i>
-                <div>
-                  <h3 class="skills_name">HTML</h3>
-                  <span class="skills_level">Advanced</span>
-                </div>
+          <div class="about_data reveal">
+            <p>
+              I'm a versatile full stack web developer and cybersecurity enthusiast. I enjoy the whole journey of a
+              product — from the database schema and API, through to the pixels a user actually touches.
+            </p>
+            <p>
+              My security background shapes how I write code: I think about how something can break
+              before I ship it. That combination of networking, VAPT and web development lets me deliver
+              products that are innovative <em>and</em> protected.
+            </p>
+            <p>
+              Today I work as an Engineer (Web) at <strong>CodeClouds</strong>. Outside work I freelance, mentor
+              students, and write on Medium.
+            </p>
+
+            <div class="stats">
+              <div class="stat glass">
+                <span class="stat_num" data-count="3">0</span><span class="stat_plus">+</span>
+                <span class="stat_label">Years in industry</span>
               </div>
-              <div class="skills_data">
-                <i class='bx bxl-css3' ></i>
-                <div>
-                  <h3 class="skills_name">CSS</h3>
-                  <span class="skills_level">Advanced</span>
-                </div>
+              <div class="stat glass">
+                <span class="stat_num" data-count="3">0</span><span class="stat_plus">+</span>
+                <span class="stat_label">Years freelancing</span>
               </div>
-              <div class="skills_data">
-                <i class='bx bxl-javascript' ></i>
-                <div>
-                  <h3 class="skills_name">JavaScript</h3>
-                  <span class="skills_level">Intermediate</span>
-                </div>
-              </div>
-              <div class="skills_data">
-                <i class='bx bxl-php' ></i>
-                <div>
-                  <h3 class="skills_name">PHP</h3>
-                  <span class="skills_level">Intermediate</span>
-                </div>
-              </div>
-              <div class="skills_data">
-                <i class='bx bxs-data' ></i>
-                <div>
-                  <h3 class="skills_name">MySQL</h3>
-                  <span class="skills_level">Intermediate</span>
-                </div>
+              <div class="stat glass">
+                <span class="stat_num" data-count="20">0</span><span class="stat_plus">+</span>
+                <span class="stat_label">Projects delivered</span>
               </div>
             </div>
-            <!-- /////////////////////////////// -->
-            <div class="skills_group">
-              <div class="skills_data">
-                <i class='bx bxl-react' ></i>
-                <div>
-                  <h3 class="skills_name">React</h3>
-                  <span class="skills_level">Intermediate</span>
-                </div>
-              </div>
-              <div class="skills_data">
-                <i class='bx bxl-vuejs'></i>
-                <div>
-                  <h3 class="skills_name">VueJs</h3>
-                  <span class="skills_level">Intermediate</span>
-                </div>
-              </div>
-              <div class="skills_data">
-                <i class='bx bxl-nodejs'></i>
-                <div>
-                  <h3 class="skills_name">NodeJs</h3>
-                  <span class="skills_level">Intermediate</span>
-                </div>
-              </div>
-              <div class="skills_data">
-                <i class='bx bxl-nodejs'></i>
-                <div>
-                  <h3 class="skills_name">Laravel</h3>
-                  <span class="skills_level">Intermediate</span>
-                </div>
-              </div>
-              <div class="skills_data">
-                <i class='bx bx-data'></i>
-                <div>
-                  <h3 class="skills_name">MongoDB</h3>
-                  <span class="skills_level">Intermediate</span>
-                </div>
-              </div>
-              <div class="skills_data">
-                <i class='bx bxl-git'></i>
-                <div>
-                  <h3 class="skills_name">Git,Firebase</h3>
-                  <span class="skills_level">Intermediate</span>
-                </div>
-              </div>
-            </div>
-           
-          </div>
-        </div>
-        <div class="skills_content">
-          <h3 class="skills_title">Ethical Hacking</h3>
-          <div class="skills_box">
-            <div class="skills_group">
-              <div class="skills_data">
-                <i class='bx bxs-shapes'></i>
-                <div>
-                  <h3 class="skills_name">Linux</h3>
-                  <span class="skills_level">Intermediate</span>
-                </div>
-              </div>
-              <div class="skills_data">
-                <i class='bx bx-network-chart'></i>
-                <div>
-                  <h3 class="skills_name">Networking</h3>
-                  <span class="skills_level">Intermediate</span>
-                </div>
-              </div>
-              <div class="skills_data">
-                <i class='bx bx-desktop'></i>
-                <div>
-                  <h3 class="skills_name">Penetration Testing</h3>
-                  <span class="skills_level">Intermediate</span>
-                </div>
-              </div>
-              
-            </div>
-            <!-- /////////////////////////////// -->
-            <div class="skills_group">
-              <div class="skills_data">
-                <i class='bx bx-mobile-alt'></i>
-                <div>
-                  <h3 class="skills_name">Application Security</h3>
-                  <span class="skills_level">Intermediate</span>
-                </div>
-              </div>
-              <div class="skills_data">
-                <i class='bx bx-test-tube'></i>
-                <div>
-                  <h3 class="skills_name">VAPT</h3>
-                  <span class="skills_level">Intermediate</span>
-                </div>
-              </div>
+
+            <div class="about_buttons">
+              <a href="assets/Arijit_Paul_CV.pdf" class="button" download>Download CV <i class='bx bx-download'></i></a>
+              <a href="https://github.com/Darkethic06" target="_blank" rel="noopener" class="button button-ghost"><i class='bx bxl-github'></i> GitHub</a>
             </div>
           </div>
         </div>
+      </div>
+    </section>
 
-        <div class="skills_content">
-          <h3 class="skills_title">Programming Skills</h3>
-          <div class="skills_box">
-            <div class="skills_group">
-              <div class="skills_data">
-                <i class='bx bxl-c-plus-plus' ></i>
-                <div>
-                  <h3 class="skills_name">C++</h3>
-                  <span class="skills_level">Intermediate</span>
-                </div>
+    <!-- ------------------Skills section-------------------- -->
+    <section class="section" id="skills">
+      <div class="container">
+        <header class="section_head reveal">
+          <span class="section_subtitle mono">02. skills</span>
+          <h2 class="section_title">My <span class="gradient-text">toolkit</span></h2>
+        </header>
+
+        <div class="skills_grid">
+          <article class="skill_card glass reveal tilt">
+            <div class="skill_card-icon"><i class='bx bx-code-block'></i></div>
+            <h3>Web Development</h3>
+            <p>End-to-end web apps, from REST APIs to responsive interfaces.</p>
+            <ul class="chips">
+              <li><i class='bx bxl-html5'></i> HTML</li>
+              <li><i class='bx bxl-css3'></i> CSS / SASS</li>
+              <li><i class='bx bxl-javascript'></i> JavaScript</li>
+              <li><i class='bx bxl-php'></i> PHP</li>
+              <li><i class='bx bxl-php'></i> Laravel</li>
+              <li><i class='bx bxl-react'></i> React</li>
+              <li><i class='bx bxl-vuejs'></i> Vue.js</li>
+              <li><i class='bx bxl-nodejs'></i> Node.js</li>
+              <li><i class='bx bxl-wordpress'></i> WordPress</li>
+              <li><i class='bx bxs-data'></i> MySQL</li>
+              <li><i class='bx bx-data'></i> MongoDB</li>
+              <li><i class='bx bxl-firebase'></i> Firebase</li>
+              <li><i class='bx bxl-git'></i> Git</li>
+            </ul>
+          </article>
+
+          <article class="skill_card glass reveal tilt">
+            <div class="skill_card-icon"><i class='bx bx-shield-quarter'></i></div>
+            <h3>Ethical Hacking</h3>
+            <p>Finding weaknesses in apps and networks before attackers do.</p>
+            <ul class="chips">
+              <li><i class='bx bxl-tux'></i> Linux</li>
+              <li><i class='bx bx-network-chart'></i> Networking</li>
+              <li><i class='bx bx-target-lock'></i> Penetration Testing</li>
+              <li><i class='bx bx-lock-alt'></i> Application Security</li>
+              <li><i class='bx bx-test-tube'></i> VAPT</li>
+            </ul>
+          </article>
+
+          <article class="skill_card glass reveal tilt">
+            <div class="skill_card-icon"><i class='bx bx-terminal'></i></div>
+            <h3>Programming</h3>
+            <p>Strong fundamentals for solving problems across platforms.</p>
+            <ul class="chips">
+              <li><i class='bx bxl-c-plus-plus'></i> C++</li>
+              <li><i class='bx bxl-python'></i> Python</li>
+              <li><i class='bx bxl-flutter'></i> Flutter</li>
+              <li><i class='bx bx-git-branch'></i> DSA</li>
+              <li><i class='bx bx-bulb'></i> Problem Solving</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ------------------Experience section-------------------- -->
+    <section class="section" id="experience">
+      <div class="container">
+        <header class="section_head reveal">
+          <span class="section_subtitle mono">03. experience</span>
+          <h2 class="section_title">Where I've <span class="gradient-text">worked</span></h2>
+        </header>
+
+        <div class="exp_layout">
+          <ol class="timeline">
+            <li class="timeline_item reveal">
+              <span class="timeline_dot current"></span>
+              <div class="timeline_card glass">
+                <span class="timeline_date mono">Jul 2024 — Present</span>
+                <h3>Engineer: Web</h3>
+                <span class="timeline_org">CodeClouds</span>
+                <p>Building and maintaining production web applications for international clients.</p>
               </div>
-              <div class="skills_data">
-                <i class='bx bxl-python'></i>
-                <div>
-                  <h3 class="skills_name">Python</h3>
-                  <span class="skills_level">Intermediate</span>
-                </div>
+            </li>
+            <li class="timeline_item reveal">
+              <span class="timeline_dot"></span>
+              <div class="timeline_card glass">
+                <span class="timeline_date mono">Aug 2023 — Jul 2024</span>
+                <h3>Software Developer</h3>
+                <p>Developed full stack features across the product, from backend services to the UI.</p>
               </div>
-              <div class="skills_data">
-                <i class='bx bxl-flutter' ></i>
-                <div>
-                  <h3 class="skills_name">Flutter</h3>
-                  <span class="skills_level">Intermediate</span>
-                </div>
+            </li>
+            <li class="timeline_item reveal">
+              <span class="timeline_dot"></span>
+              <div class="timeline_card glass">
+                <span class="timeline_date mono">Jan 2022 — Jul 2023</span>
+                <h3>Senior Web Developer</h3>
+                <span class="timeline_org">Truepid Technology</span>
+                <p>Led web development for client projects including e-commerce, service and booking platforms.</p>
               </div>
+            </li>
+            <li class="timeline_item reveal">
+              <span class="timeline_dot"></span>
+              <div class="timeline_card glass">
+                <span class="timeline_date mono">Mar 2021 — Dec 2023</span>
+                <h3>Mentor</h3>
+                <span class="timeline_org">SkillHaunt Computer Institute</span>
+                <p>Mentored students in web development and programming fundamentals.</p>
+              </div>
+            </li>
+          </ol>
+
+          <aside class="intern reveal">
+            <h3 class="intern_title mono"><i class='bx bx-shield-alt-2'></i> Internships</h3>
+            <div class="intern_card glass tilt">
+              <span class="timeline_date mono">Jun 2021 — Jul 2021</span>
+              <h4>Cyber Security Summer Internship</h4>
+              <span class="timeline_org">Gurugram Police</span>
             </div>
-            <!-- /////////////////////////////// -->
-            <div class="skills_group">
-              <div class="skills_data">
-                <i class='bx bx-code-alt'></i>
-                <div>
-                  <h3 class="skills_name">DSA</h3>
-                  <span class="skills_level">Basic</span>
-                </div>
-              </div>
-              <div class="skills_data">
-                <i class='bx bx-code-curly'></i>
-                <div>
-                  <h3 class="skills_name">Problem Solving</h3>
-                  <span class="skills_level">Intermediate</span>
-                </div>
-              </div>
+            <div class="intern_card glass tilt">
+              <span class="timeline_date mono">Jun 2020</span>
+              <h4>Cyber ANZ Program</h4>
+              <span class="timeline_org">ANZ</span>
             </div>
-            <!-- /////////////////////////////// -->
-            <!-- <div class="skills_group">
-              <div class="skills_data">
-                <i class='bx bx-code-alt'></i>
-                <div>
-                  <h3 class="skills_name">Java</h3>
-                  <span class="skills_level">Basic</span>
-                </div>
-              </div>
-              
-            </div> -->
-
-          </div>
+          </aside>
         </div>
       </div>
-
     </section>
-    <!-- ------------------What i offer-------------------- -->
-    <section class="service section">
-      <span class="section_subtitle">My Experience</span>
-      <h2 class="section_title">What I Worked For</h2>
-      <div class="services_container container grid">
-        <div class="service_card">
-          <h3 class="services_title">Senior Web Developer at Truepid Technology</h3>
-          <span class="service_button">2nd January,2022 - 29th July,2023</span>
-        </div>
-        <div class="service_card">
-          <h3 class="services_title">Mentor at SkillHaunt Computer Institute</h3>
-          <span class="service_button">12th March,2021- 22nd December,2023</span>
-        </div>
-        <div class="service_card">
-          <h3 class="services_title">Software Developer at ....</h3>
-          <span class="service_button">2nd August,2023 - 3rd July,2024</span>
-        </div>
-        <div class="service_card">
-          <h3 class="services_title">Engineer:Web at CodeClouds</h3>
-          <span class="service_button">8th July,2022 - Present</span>
-        </div>
-      </div>
 
-    </section>
-    <!-- ---------------internships------------------------ -->
-    <section class="service section">
-      <h2 class="section_title">Internships</h2>
-      <div class="services_container container grid">
-        <div class="service_card">
-          <h3 class="services_title">Cyber ANZ Program</h3>
-          <span class="service_button">June 2020</span>
-        </div>
-        <div class="service_card">
-          <h3 class="services_title">Gurugram Police Cyber Security Summer Internship</h3>
-          <span class="service_button">June 2021 - July 2021
-          </span>
-        </div>
-      </div>
-
-    </section>
     <!-- -----------------------Projects---------------------- -->
-    <section class="work section" id="work">
-      <span class="section_subtitle">My Portfolio</span>
-      <h2 class="section_title">My Projects</h2>
+    <section class="section" id="work">
+      <div class="container">
+        <header class="section_head reveal">
+          <span class="section_subtitle mono">04. projects</span>
+          <h2 class="section_title">Selected <span class="gradient-text">work</span></h2>
+        </header>
 
-      <div class="work_filters">
-        <span class="work_item active_work" data-filter="all">All</span>
-        <span class="work_item" data-filter=".web">Web</span>
-        <span class="work_item" data-filter=".app">App</span>
-        <span class="work_item" data-filter=".tools">Tools</span>
+        <div class="work_filters reveal" role="tablist">
+          <button class="work_filter active" data-filter="all">All</button>
+          <button class="work_filter" data-filter="wordpress">WordPress</button>
+          <button class="work_filter" data-filter="php">PHP / MySQL</button>
+        </div>
+
+        <div class="work_grid">
+          <article class="work_card glass reveal tilt" data-cat="wordpress">
+            <div class="work_media"><img src="assets/work1.png" alt="SkillHaunt LMS website" loading="lazy"></div>
+            <div class="work_body">
+              <span class="work_kind mono">Learning platform</span>
+              <h3>SkillHaunt — LMS</h3>
+              <p>Course and learning management website for a computer training institute.</p>
+              <ul class="work_tags mono"><li>WordPress</li><li>HTML</li><li>CSS</li><li>JS</li></ul>
+              <a href="https://skillhaunt.in/" target="_blank" rel="noopener" class="work_link">Live site <i class='bx bx-link-external'></i></a>
+            </div>
+          </article>
+
+          <article class="work_card glass reveal tilt" data-cat="wordpress">
+            <div class="work_media"><img src="assets/work2.png" alt="Elite Style Polyclinic website" loading="lazy"></div>
+            <div class="work_body">
+              <span class="work_kind mono">Healthcare</span>
+              <h3>Elite Style Polyclinic</h3>
+              <p>Service website for a clinic, with service listings and enquiry flows.</p>
+              <ul class="work_tags mono"><li>WordPress</li><li>HTML</li><li>CSS</li><li>JS</li></ul>
+              <a href="https://elitestylepolyclinic.com/" target="_blank" rel="noopener" class="work_link">Live site <i class='bx bx-link-external'></i></a>
+            </div>
+          </article>
+
+          <article class="work_card glass reveal tilt" data-cat="wordpress">
+            <div class="work_media"><img src="assets/work3.png" alt="Punascha Books e-commerce store" loading="lazy"></div>
+            <div class="work_body">
+              <span class="work_kind mono">E-commerce</span>
+              <h3>Punascha Books</h3>
+              <p>Online bookstore with catalogue, cart and checkout.</p>
+              <ul class="work_tags mono"><li>WordPress</li><li>HTML</li><li>CSS</li><li>JS</li></ul>
+              <a href="https://punaschabooks.com/" target="_blank" rel="noopener" class="work_link">Live site <i class='bx bx-link-external'></i></a>
+            </div>
+          </article>
+
+          <article class="work_card glass reveal tilt" data-cat="php">
+            <div class="work_media"><img src="assets/work5.png" alt="PoolCar service enquiry website" loading="lazy"></div>
+            <div class="work_body">
+              <span class="work_kind mono">Service enquiry</span>
+              <h3>PoolCar</h3>
+              <p>Custom service enquiry platform with a PHP backend and MySQL database.</p>
+              <ul class="work_tags mono"><li>PHP</li><li>MySQL</li><li>HTML</li><li>CSS</li><li>JS</li></ul>
+              <a href="https://poolcar.in" target="_blank" rel="noopener" class="work_link">Live site <i class='bx bx-link-external'></i></a>
+            </div>
+          </article>
+
+          <article class="work_card glass reveal tilt" data-cat="php">
+            <div class="work_media"><img src="assets/work4.png" alt="Service booking website" loading="lazy"></div>
+            <div class="work_body">
+              <span class="work_kind mono">Booking system</span>
+              <h3>Service Booking Website</h3>
+              <p>Booking platform where customers pick a service and slot, managed from an admin panel.</p>
+              <ul class="work_tags mono"><li>PHP</li><li>MySQL</li><li>HTML</li><li>CSS</li><li>JS</li></ul>
+              <a href="https://github.com/Darkethic06" target="_blank" rel="noopener" class="work_link">View on GitHub <i class='bx bxl-github'></i></a>
+            </div>
+          </article>
+
+          <article class="work_card work_card-more glass reveal tilt" data-cat="all">
+            <div class="work_more">
+              <i class='bx bxl-github'></i>
+              <h3>More on GitHub</h3>
+              <p>Experiments, tools and open source work.</p>
+              <a href="https://github.com/Darkethic06?tab=repositories" target="_blank" rel="noopener" class="button button-ghost">Browse repositories <i class='bx bx-right-arrow-alt'></i></a>
+            </div>
+          </article>
+        </div>
       </div>
-      <div class="work_container container grid">
-        <div class="work_card mix web">
-          <img src="assets/work1.png" alt="" srcset="" class="work_img">
-          <h3 class="work_title">LMS Design</h3>
-          <span class="work_description">Built With: HTML, CSS, JS, Wordpress</span>
-          <a href="https://skillhaunt.in/" target="_blank" class="work_button">
-            Demo <i class='bx bx-right-arrow-alt work_icon'></i>
-          </a>
-        </div>
-        <div class="work_card mix web">
-          <img src="assets/work2.png" alt="" srcset="" class="work_img">
-          <h3 class="work_title">Service Website</h3>
-          <span class="work_description">Built With: HTML,CSS,JS, Wordpress</span>
-          <a href="https://elitestylepolyclinic.com/" target="_blank" class="work_button">
-            Demo <i class='bx bx-right-arrow-alt work_icon'></i>
-          </a>
-        </div>
-
-
-        <div class="work_card mix web">
-          <img src="assets/work3.png" alt="" srcset="" class="work_img">
-          <h3 class="work_title">E-Commerce</h3>
-          <span class="work_description">Built With: HTMl,CSS,JS,Wordpress</span>
-          <a href="https://punaschabooks.com/" class="work_button" target="_blank">
-            Demo <i class='bx bx-right-arrow-alt work_icon'></i>
-          </a>
-        </div>
-        <div class="work_card mix web">
-          <img src="assets/work4.png" alt="" srcset="" class="work_img">
-          <h3 class="work_title">Service Booking Website</h3>
-          <span class="work_description">Built With: HTML, CSS, JS, PHP, MYSQL</span>
-          <a href="#" class="work_button" target="_blank">
-            Demo <i class='bx bx-right-arrow-alt work_icon'></i>
-          </a>
-        </div>
-        <div class="work_card mix web">
-          <img src="assets/work5.png" alt="" srcset="" class="work_img">
-          <h3 class="work_title">Service Enquiry Project</h3>
-          <span class="work_description">Built With: HTML, CSS, JS, PHP, MYSQL</span>
-          <a href="https://poolcar.in" class="work_button" target="_blank">
-            Demo <i class='bx bx-right-arrow-alt work_icon'></i>
-          </a>
-        </div>
-        <div class="work_card mix web">
-          <img src="assets/work6.png" alt="" srcset="" class="work_img">
-          <h3 class="work_title">Ecommerce Project</h3>
-          <span class="work_description">Built With: HTML, CSS, SASS, JS, PHP, MYSQL</span>
-          <a href="" class="work_button" target="_blank">
-            Demo <i class='bx bx-right-arrow-alt work_icon'></i>
-          </a>
-        </div>
-        <!-- <div class="work_card mix app">
-          <img src="assets/app1.webp" alt="" srcset="" class="work_img">
-
-          <h3 class="work_title">E-Commerce App</h3>
-          <a href="#" class="work_button">
-            Demo <i class='bx bx-right-arrow-alt work_icon'></i>
-          </a>
-        </div> -->
-        <!-- <div class="work_card mix app">
-          <img src="assets/app2.jpeg" alt="" srcset="" class="work_img">
-
-          <h3 class="work_title">Startup Project(Service Based App)</h3>
-          <a href="#" class="work_button">
-            Demo <i class='bx bx-right-arrow-alt work_icon'></i>
-          </a>
-        </div> -->
-      </div>
-
     </section>
+
     <!-- --------------------------Contact section----------------------------- -->
+    <section class="section" id="contact">
+      <div class="container">
+        <header class="section_head reveal">
+          <span class="section_subtitle mono">05. contact</span>
+          <h2 class="section_title">Let's build something <span class="gradient-text">secure</span></h2>
+          <p class="section_lead">Have a project, a role, or a security question? My inbox is open.</p>
+        </header>
 
-    <section class="contact section" id="contact">
-      <span class="section_subtitle">Get in touch</span>
-      <h2 class="section_title">Contact Me</h2>
-      <div class="contact_container container grid">
-        <div class="contact_content">
-          <h3 class="contact_title">Talk to me</h3>
-          <div class="contact_info">
-            <div class="contact_card">
-              <i class='bx bx-mail-send contact_card-icon'></i>
-              <h3 class="contact_card-title">Email</h3>
-              <span class="contact_card-data">arijitpaul062@gmail.com</span>
-              <a href="mailto:arijitpaul062@gmail.com" target="_blank" class="contact_button">
-                Write me <i class='bx bx-right-arrow-alt contact_button-icon'></i>
-              </a>
-            </div>
-
-
-            <div class="contact_card">
-              <i class='bx bxl-whatsapp contact_card-icon'></i>
-              <h3 class="contact_card-title">Whatsapp</h3>
-              <span class="contact_card-data">+91-9051098183</span>
-              <a href="https://wa.me/9051098183" target="_blank" class="contact_button">
-                Write me <i class='bx bx-right-arrow-alt contactbuttond-icon'></i>
-              </a>
-            </div>
-
-
-            <div class="contact_card">
-              <i class='bx bxl-telegram contact_card-icon'></i>
-              <h3 class="contact_card-title">Telegram</h3>
-              <span class="contact_card-data">@nomadex98</span>
-              <a href="https://www.facebook.com/arijit.paul.7311/" target="_blank" class="contact_button">
-                Write me <i class='bx bx-right-arrow-alt contact_button-icon'></i>
-              </a>
-            </div>
+        <div class="contact_grid">
+          <div class="contact_cards reveal">
+            <a href="mailto:arijitpaul062@gmail.com" class="contact_card glass">
+              <i class='bx bx-mail-send'></i>
+              <div><h3>Email</h3><span>arijitpaul062@gmail.com</span></div>
+              <i class='bx bx-right-arrow-alt contact_arrow'></i>
+            </a>
+            <a href="https://wa.me/919051098183" target="_blank" rel="noopener" class="contact_card glass">
+              <i class='bx bxl-whatsapp'></i>
+              <div><h3>WhatsApp</h3><span>+91 90510 98183</span></div>
+              <i class='bx bx-right-arrow-alt contact_arrow'></i>
+            </a>
+            <a href="https://t.me/nomadex98" target="_blank" rel="noopener" class="contact_card glass">
+              <i class='bx bxl-telegram'></i>
+              <div><h3>Telegram</h3><span>@nomadex98</span></div>
+              <i class='bx bx-right-arrow-alt contact_arrow'></i>
+            </a>
+            <a href="https://www.linkedin.com/in/arijitpaul062/" target="_blank" rel="noopener" class="contact_card glass">
+              <i class='bx bxl-linkedin-square'></i>
+              <div><h3>LinkedIn</h3><span>in/arijitpaul062</span></div>
+              <i class='bx bx-right-arrow-alt contact_arrow'></i>
+            </a>
           </div>
-        </div>
-        <div class="contact_content">
-          <h3 class="contact_title">Write to me</h3>
-          <form action="" class="contact_form">
-            <div class="contact_form-div">
-              <label for="" class="contact_form-tag">Name</label>
-              <input type="text" class="contact_form-input" placeholder="Name">
-            </div>
-            <div class="contact_form-div">
-              <label for="" class="contact_form-tag">E-Mail</label>
-              <input type="text" class="contact_form-input" placeholder="Email">
-            </div>
-            <div class="contact_form-div contact_form-area">
-              <label for="" class="contact_form-tag">Project Details</label>
-              <textarea name="" id="" cols="30" rows="10" placeholder="Write your project"
-                class="contact_form-input"></textarea>
-            </div>
 
-            <input type="submit" class="button" value="Send Message">
+          <form class="contact_form glass reveal" id="contact-form">
+            <div class="field">
+              <input type="text" id="cf-name" name="name" placeholder=" " required>
+              <label for="cf-name">Your name</label>
+            </div>
+            <div class="field">
+              <input type="email" id="cf-email" name="email" placeholder=" " required>
+              <label for="cf-email">Your email</label>
+            </div>
+            <div class="field">
+              <textarea id="cf-message" name="message" rows="5" placeholder=" " required></textarea>
+              <label for="cf-message">Tell me about your project</label>
+            </div>
+            <button type="submit" class="button">Send message <i class='bx bx-send'></i></button>
           </form>
         </div>
       </div>
     </section>
-
-    <!-- ---------------------------Footer-------------------------- -->
-    <footer class="footer">
-      <div class="footer_container container">
-        <h1 class="footer_title">THE END</h1>
-        <ul class="footer_list">
-          <li>
-            <a href="#about" class="footer_link">About</a>
-          </li>
-          <li>
-            <a href="#work" class="footer_link">Work</a>
-          </li>
-          <li>
-            <a href="#skills" class="footer_link">Skills</a>
-          </li>
-        </ul>
-
-        <ul class="footer_social">
-          <a href="https://medium.com/@arijitpaul062" target="_blank" class="footer_social-link">
-            <i class="bx bxl-medium"></i>
-          </a>
-          <!-- <a href="https://www.instagram.com/arijitpaul687/" target="_blank" class="footer_social-link">
-            <i class="bx bxl-instagram"></i>
-          </a> -->
-          <a href="https://www.linkedin.com/in/arijitpaul062/" target="_blank" class="footer_social-link">
-            <i class="bx bxl-linkedin-square"></i>
-          </a>
-          <a href="https://github.com/Darkethic06" target="_blank" class="footer_social-link">
-            <i class="bx bxl-github"></i>
-          </a>
-        </ul>
-
-        <span class="footer_copy">
-          &#169; Arijit Paul. All rights reserved | Last Updated: 1st August, 2024
-        </span>
-      </div>
-
-    </footer>
-
-    <!-- --------------------------------------------- -->
-
   </main>
-  <!-- --------------------Mixit up js-------------------------- -->
-  <script src="js/mixitup.min.js"></script>
-  <!-- -------------------------Scroll reveal js------------------------------- -->
-  <script src="js/scrollreveal.min.js"></script>
-  <!-- ----------------Script File------------------- -->
+
+  <!-- ---------------------------Footer-------------------------- -->
+  <footer class="footer">
+    <div class="container footer_container">
+      <a href="#home" class="nav_logo"><span class="nav_logo-mark">&lt;/&gt;</span> arijit<span class="accent">.</span></a>
+      <div class="footer_social">
+        <a href="https://github.com/Darkethic06" target="_blank" rel="noopener" aria-label="GitHub"><i class="bx bxl-github"></i></a>
+        <a href="https://www.linkedin.com/in/arijitpaul062/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="bx bxl-linkedin-square"></i></a>
+        <a href="https://medium.com/@arijitpaul062" target="_blank" rel="noopener" aria-label="Medium"><i class="bx bxl-medium"></i></a>
+      </div>
+      <span class="footer_copy mono">&copy; <span id="year"></span> Arijit Paul · Designed &amp; built with Three.js</span>
+    </div>
+  </footer>
+
+  <script type="module" src="js/scene.js"></script>
   <script src="js/script.js"></script>
 </body>
 
